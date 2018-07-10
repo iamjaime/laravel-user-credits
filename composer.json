@@ -10,7 +10,9 @@
         }
     ],
     "autoload": {
-        "psr-4": { "Iamjaime\\Credits" : "src/" }
+        "psr-4": {
+            "Iamjaime\\Credits\\": "src/"
+        }
     },
     "minimum-stability": "dev",
     "require": {}
