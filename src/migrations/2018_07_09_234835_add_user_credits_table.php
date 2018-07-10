@@ -22,13 +22,6 @@ class AddUserCreditsTable extends Migration
 
             $table->integer('amount')->default(0); //credit amount
         });
-
-        //In case we are using laravel spark and have a subscriptions table
-        if(Schema::hasTable('subscriptions')){
-            Schema::table('subscriptions', function (Blueprint $table) {
-                $table->integer('credits')->after('stripe_plan')->default(0);
-            });
-        }
     }
 
     /**
@@ -43,12 +36,5 @@ class AddUserCreditsTable extends Migration
         });
 
         Schema::drop('user_credits');
-
-        //If the subscriptions table from laravel spark exists....
-        if(Schema::hasTable('subscriptions')){
-            Schema::table('subscriptions', function($table) {
-                $table->dropColumn('credits');
-            });
-        }
     }
 }
