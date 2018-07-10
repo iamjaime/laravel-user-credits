@@ -1,5 +1,5 @@
 {
-    "name": "iamjaime/user-credits",
+    "name": "iamjaime/credits",
     "description": "Laravel Package for easily adding User Credits support",
     "type": "laravel",
     "license": "MIT",
