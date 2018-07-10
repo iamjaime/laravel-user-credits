@@ -9,6 +9,9 @@
             "email": "codehead@codelegends.com"
         }
     ],
+    "autoload": {
+        "psr-4": { "Iamjaime\\Credits" : "src/" }
+    },
     "minimum-stability": "dev",
     "require": {}
 }
