@@ -69,6 +69,19 @@ Your Model should now look something like this :
 ```
 
 
+
+##### If you are using Laravel Spark you will need to do the following :
+*Go to App/Providers/EventServiceProvider.php and add the following to the `protected $listen` array:*
+```
+'Laravel\Spark\Events\Auth\UserRegistered' => [
+            'Iamjaime\Credits\Listeners\UserRegistered'
+        ],
+
+```
+
+
+
+
 #### Now you are all setup and ready to go!
 
 ##### Some examples Below :
