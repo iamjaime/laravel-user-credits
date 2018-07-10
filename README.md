@@ -12,7 +12,7 @@ To get started follow these steps:
 
 *Install the package using composer*
 
-`composer require iamjaime/laravel-user-credits`
+`composer require iamjaime/laravel-user-credits --dev`
  
  
 Then go to your config/app directory and add the following to the providers array:
