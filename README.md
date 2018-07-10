@@ -19,6 +19,9 @@ Then go to your config/app directory and add the following to the providers arra
 
 `Iamjaime\Credits\UserCreditServiceProvider::class`
 
+Now you must run the migrations....
+
+`php artisan migrate` 
 
 Now go to your User's Model and add the following line at the top:
 
