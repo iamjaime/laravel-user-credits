@@ -64,24 +64,4 @@ trait UsesTeamCredits
         return $credits;
     }
 
-
-
-    /**
-     * Handles extending the create method in order to create a Team Credits record
-     *
-     * @param array $attributes
-     * @return mixed
-     */
-    public static function create(array $attributes = [])
-    {
-        $team = static::query()->create($attributes);
-
-        //now lets make the new credits record....
-        $credits = new Credit();
-        $credits->team_id = $team->id;
-        $credits->save();
-
-        return $team;
-    }
-
 }
