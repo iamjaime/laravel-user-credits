@@ -1,30 +1,30 @@
 <?php
 namespace Iamjaime\Credits\Traits;
 
-use Iamjaime\Credits\Models\UserCredit as Credit;
+use Iamjaime\Credits\Models\TeamCredit as Credit;
 
 trait UsesTeamCredits
 {
 
     /**
-     * Get the credit amount for specified user
+     * Get the credit amount for specified team
      * @return mixed
      */
     public function credit()
     {
-        return $this->hasOne('Iamjaime\Credits\Models\UserCredit', 'user_id');
+        return $this->hasOne('Iamjaime\Credits\Models\TeamCredit', 'user_id');
     }
 
 
     /**
-     * Handles updating the user's credits
+     * Handles updating the team's credits
      *
      * @param $amount
      * @return mixed
      */
     public function updateCredits($amount)
     {
-        $credits = Credit::where('user_id', '=', $this->id)->first();
+        $credits = Credit::where('team_id', '=', $this->id)->first();
         $credits->amount = $amount;
         $credits->save();
 
@@ -32,7 +32,7 @@ trait UsesTeamCredits
     }
 
     /**
-     * Handles adding more credits to the user's existing
+     * Handles adding more credits to the team's existing
      * amount of credits.
      *
      * @param $amount
@@ -40,7 +40,7 @@ trait UsesTeamCredits
      */
     public function addCredits($amount)
     {
-        $credits = Credit::where('user_id', '=', $this->id)->first();
+        $credits = Credit::where('team_id', '=', $this->id)->first();
         $credits->amount = $credits->amount + $amount;
         $credits->save();
 
@@ -49,7 +49,7 @@ trait UsesTeamCredits
 
 
     /**
-     * Handles deducting credits from the user's existing
+     * Handles deducting credits from the team's existing
      * amount of credits
      *
      * @param $amount
@@ -57,7 +57,7 @@ trait UsesTeamCredits
      */
     public function deductCredits($amount)
     {
-        $credits = Credit::where('user_id', '=', $this->id)->first();
+        $credits = Credit::where('team_id', '=', $this->id)->first();
         $credits->amount = $credits->amount - $amount;
         $credits->save();
 
@@ -67,21 +67,21 @@ trait UsesTeamCredits
 
 
     /**
-     * Handles extending the create method in order to create a User Credits record
+     * Handles extending the create method in order to create a Team Credits record
      *
      * @param array $attributes
      * @return mixed
      */
     public static function create(array $attributes = [])
     {
-        $user = static::query()->create($attributes);
+        $team = static::query()->create($attributes);
 
         //now lets make the new credits record....
         $credits = new Credit();
-        $credits->user_id = $user->id;
+        $credits->team_id = $team->id;
         $credits->save();
 
-        return $user;
+        return $team;
     }
 
 }
