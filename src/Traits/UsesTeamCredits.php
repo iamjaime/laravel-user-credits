@@ -12,7 +12,7 @@ trait UsesTeamCredits
      */
     public function credit()
     {
-        return $this->hasOne('Iamjaime\Credits\Models\TeamCredit', 'user_id');
+        return $this->hasOne('Iamjaime\Credits\Models\TeamCredit', 'team_id');
     }
 
 
