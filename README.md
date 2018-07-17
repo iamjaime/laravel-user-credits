@@ -80,6 +80,47 @@ Your Model should now look something like this :
 ```
 
 
+##### If you are using Team Billing from Laravel Spark and would like to use credits per team do the following :
+
+*Go to App/Providers/EventServiceProvider.php and add the following to the `protected $listen` array:*
+```
+'Laravel\Spark\Events\Teams\TeamCreated' => [
+            'Laravel\Spark\Listeners\Teams\UpdateOwnerSubscriptionQuantity',
+            'Iamjaime\Credits\Listeners\TeamCreated'
+        ],
+
+```
+
+
+Go to your Team's Model and add the following line at the top:
+
+`use Iamjaime\Credits\Traits\UsesTeamCredits;`
+
+
+then add the following line inside your class : 
+
+`use UsesTeamCredits;`
+
+
+Your Model should now look something like this : 
+
+```
+<?php
+
+namespace App;
+
+use Laravel\Spark\Team as SparkTeam;
+use Iamjaime\Credits\Traits\UsesTeamCredits;
+
+class Team extends SparkTeam
+{
+    use UsesTeamCredits;
+    
+    //
+}
+
+```
+
 
 
 #### Now you are all setup and ready to go!
@@ -97,6 +138,16 @@ $credits = $user->credit->amount;
 
 ```
 
+*The following snippet will return the team object with the team's credits.*
+
+```
+$team = App\Team::where('id', '=', 1)->with('credit')->first();
+
+//These are the team's credits....
+$credits = $team->credit->amount;
+
+```
+
 
 *Here is an example of how to update the user's credits.*
 
@@ -104,6 +155,15 @@ $credits = $user->credit->amount;
 $user = App\User::where('id', '=', 1)->first();
 
 $user->updateCredits(500);
+
+```
+
+*Here is an example of how to update the team's credits.*
+
+```
+$team = App\Team::where('id', '=', 1)->first();
+
+$team->updateCredits(500);
 
 ```
 
